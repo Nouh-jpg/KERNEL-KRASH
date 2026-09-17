@@ -1,5 +1,15 @@
 # KERNEL KRASH 🖥️
 
+## Play the first prototype
+
+1. Download [Godot 4](https://godotengine.org/download/windows/) and extract it.
+2. Open Godot, choose **Import**, and select this repository's `project.godot` file.
+3. Press **F6** to run the open scene or **F5** to run the project.
+
+Click an empty grid tile to build a Firewall for 50 Data. It automatically shoots nearby viruses. Defeated viruses earn 10 Data; defend the CPU through increasing waves. Press **R** to restart after a loss. This is an early prototype with placeholder shapes; the towers, enemies, art, and events described below are planned features.
+
+The first scene is `scenes/main/main.tscn`, and its game logic is in `scripts/managers/game.gd`. The viewport is 1280×720. The old roadmap dates below are historical planning notes.
+
 > **A hyper-focused, single-screen tower defense game built in Godot.**
 > > Protect the CPU core from waves of digital Virus enemies on a fixed grid.
 > >
