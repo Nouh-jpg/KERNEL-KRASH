@@ -111,58 +111,56 @@ The first scene is `scenes/main/main.tscn`, and its game logic is in `scripts/ma
 > >
 > > ## 🗓️ 11-Week Development Roadmap (May 29 – Aug 10)
 > >
-> > | Week | Dates | Nadeem (Structural/Economy/UI) | Jesse (Combat/Mechanics/Content) |
-> > |------|-------|-------------------------------|----------------------------------|
-> > | **1** | May 29 – Jun 4 | Initialize Godot project & Git repo. Set up CPU core scene. | Set up TileMap grid & coordinate system. Import placeholder 8-bit assets. |
-> > | **2** | Jun 5 – Jun 11 | Set up A* pathfinding environment & define enemy path nodes. | Implement Swarmer enemy scene & navigation logic. |
-> > | **3** | Jun 12 – Jun 18 | Implement tower placement logic (input detection, no overlap). | Develop basic Firewall tower scene (instancing, target detection). |
-> > | **4** | Jun 19 – Jun 25 | Implement projectile logic (movement, collision, damage calc). | Build Wave Manager & enemy health/death logic. |
-> > | **5** | Jun 26 – Jul 2 | Design & implement primary UI (currency display, buy buttons). Data Fragments resource system. | Develop ByteMiner economy tower & resource generation. |
-> > | **6** | Jul 3 – Jul 9 | Implement tile-flagging logic for Corrupted status. | Implement 25% fire rate debuff on towers on Corrupted tiles. |
-> > | **7** | Jul 10 – Jul 16 | Implement Defragmenter tower (long range, targets highest HP). | Implement EMP Emitter tower (AOE stun). |
-> > | **8** | Jul 17 – Jul 23 | Design & implement Code Injection popup UI & timer logic. | Implement Code Injection logic (random string gen, input check, consequences). |
-> > | **9** | Jul 24 – Jul 30 | Implement Tank enemy (line-of-sight blocking). | Implement Skipper enemy (fast, AOE resistance). Balance waves. |
-> > | **10** | Jul 31 – Aug 6 | Implement System Overload ability. Integrate SFX. | Art polish (final sprites/animations) & bug fixing. |
-> > | **11** | Aug 7 – Aug 10 | Final build testing & release package prep. | Documentation & post-launch roadmap (Crisis Challenges). |
+> > **Progress checked September 16, 2026.** These are the original 2026 planning dates, not current deadlines. The playable prototype uses drawn placeholder shapes and one script; items described as scenes or separate managers below still need that structure.
+> >
+> > | Week | Original dates | Nadeem (structure, economy, UI) | Jesse (combat, mechanics, content) | Progress |
+> > |------|----------------|----------------------------------|-------------------------------------|----------|
+> > | **1** | May 29 – Jun 4 | Godot project, Git repo, CPU core | Grid and placeholder visuals | **Partly done:** Project, repo, grid and core exist; TileMap and pixel art are pending. |
+> > | **2** | Jun 5 – Jun 11 | Enemy path setup | Basic enemy movement | **Partly done:** One fixed path and moving virus placeholders exist; A* and enemy scenes are pending. |
+> > | **3** | Jun 12 – Jun 18 | Tower placement and no overlap | Firewall targeting | **Partly done:** Click placement and automatic targeting work; a reusable tower scene is pending. |
+> > | **4** | Jun 19 – Jun 25 | Projectile damage | Waves and enemy health | **Partly done:** Visual shots, damage, health and waves work in one script; separate systems are pending. |
+> > | **5** | Jun 26 – Jul 2 | Data display and shop UI | ByteMiner economy tower | **Partly done:** Data rewards and Firewall cost display work; shop buttons and ByteMiner are pending. |
+> > | **6** | Jul 3 – Jul 9 | Corrupted tile flags | 25% tower fire-rate penalty | **Not started.** |
+> > | **7** | Jul 10 – Jul 16 | Defragmenter tower | EMP Emitter tower | **Not started.** |
+> > | **8** | Jul 17 – Jul 23 | Code Injection UI and timer | Upgrade logic and consequences | **Not started.** |
+> > | **9** | Jul 24 – Jul 30 | Tank enemy | Skipper enemy and wave balance | **Not started.** |
+> > | **10** | Jul 31 – Aug 6 | System Overload and sound | Art polish and bug fixes | **Not started.** |
+> > | **11** | Aug 7 – Aug 10 | Build testing and release package | Documentation and future challenges | **Not started:** Playable prototype only; no release build. |
+> >
+> > **Next three steps:** (1) Move the prototype's enemies, towers, waves and currency into reusable Godot scenes/scripts. (2) Add corrupted tiles and their 25% fire-rate penalty. (3) Add the remaining towers and enemies, then playtest and rebalance waves.
 > >
 > > ---
 > >
-> > ## ✅ Week 1 Checklist — Nadeem (May 29 – Jun 4)
-> >
-> > > **Goal: Initialize the Godot project and Git repository, and set up the CPU core scene.**
-> > >
-> > > - [ ] Install Godot 4 (latest stable)
-> > > - [ ] - [ ] Create new Godot project named `KERNEL-KRASH`
-> > > - [ ] - [ ] Initialize local Git repository inside the Godot project folder
-> > > - [ ] - [ ] Connect local repo to this GitHub remote (`git remote add origin https://github.com/Nouh-jpg/GRIDLOCK-84.git`)
-> > > - [ ] - [ ] Create the following folder structure in the Godot project: `scenes/`, `scripts/`, `assets/sprites/`, `assets/audio/`, `docs/`
-> > > - [ ] - [ ] Create the main game scene (`main.tscn`) with a `Node2D` root node
-> > > - [ ] - [ ] Add a placeholder **CPU Core** node to the main scene (can be a `ColorRect` or `Sprite2D` with a neon cyan square for now)
-> > > - [ ] - [ ] Position the CPU Core at the center/end of where the enemy path will terminate
-> > > - [ ] - [ ] Set the Godot project's window size to **640×360** (or **1280×720**) for the 8-bit layout
-> > > - [ ] - [ ] Make the first commit: `git commit -m "Week 1: Project init, folder structure, CPU core scene"`
-> > > - [ ] - [ ] Push to GitHub main branch
-> > >
-> > > - [ ] ---
-> > >
-> > > - [ ] ## 🤝 Contributors
-> > >
-> > > - [ ] | Name | Role |
-> > > - [ ] |------|------|
-> > > - [ ] | **Nadeem (Nouh-jpg)** | Structural / Economy / UI |
-> > > - [ ] | **Jesse** | Combat / Mechanics / Content |
-> > >
-> > > - [ ] ---
-> > >
-> > > - [ ] ## 📋 Post-Launch Roadmap (Future Updates)
-> > >
-> > > - [ ] - Pop-up Crisis Challenge (Boss ability, full implementation)
-> > > - [ ] - Debug Challenge mini-game (full implementation)
-> > > - [ ] - Additional enemy types and boss variants
-> > > - [ ] - More tower types and upgrade paths
-> > > - [ ] - Level editor / multiple maps
-> > > - [ ] - Leaderboard & high score system
-> > >
-> > > - [ ] ---
-> > >
-> > > - [ ] *KERNEL KRASH — Early Access. Built with ❤️ in Godot.*
+## ✅ Week 1 Checklist — project setup (original target: May 29 – Jun 4)
+
+Progress checked September 16, 2026.
+
+- [x] Create the Godot 4 project and connect it to this GitHub repository.
+- [x] Add the `scenes/`, `scripts/`, `assets/` and `docs/` folders.
+- [x] Create `scenes/main/main.tscn` with a `Node2D` root and cyan `CPUCore` placeholder.
+- [x] Set the viewport to 1280×720.
+- [x] Commit and publish the playable prototype to the main branch.
+- [ ] Replace the drawn grid with a TileMap if the design still needs one.
+- [ ] Add pixel art assets in place of placeholder shapes.
+
+---
+
+## 🤝 Contributors
+
+| Name | Planned role |
+|------|--------------|
+| Nadeem (Nouh-jpg) | Structure, economy, UI |
+| Jesse | Combat, mechanics, content |
+
+---
+
+## 📋 Post-Launch Roadmap (Future Updates)
+
+- Pop-up Crisis Challenge (boss ability)
+- Debug Challenge mini-game
+- Additional enemy types and boss variants
+- More tower types and upgrade paths
+- Level editor and multiple maps
+- Leaderboard and high score system
+
+*KERNEL KRASH — Early Access. Built with ❤️ in Godot.*
