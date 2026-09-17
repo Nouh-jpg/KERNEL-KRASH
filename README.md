@@ -8,7 +8,7 @@
 
 Click an empty grid tile to build a Firewall for 50 Data. It automatically shoots nearby viruses. Defeated viruses earn 10 Data; defend the CPU through increasing waves. Press **R** to restart after a loss. This is an early prototype with placeholder shapes; the towers, enemies, art, and events described below are planned features.
 
-The first scene is `scenes/main/main.tscn`, and its game logic is in `scripts/managers/game.gd`. The viewport is 1280×720. The roadmap dates below are historical planning notes.
+The first scene is `scenes/main/main.tscn`, and its game logic is in `scripts/managers/game.gd`. The viewport is 1280×720. The updated 11-week plan runs from September 17 to November 29, 2026.
 
 
 > **A hyper-focused, single-screen tower defense game built in Godot.**
@@ -109,25 +109,25 @@ The first scene is `scenes/main/main.tscn`, and its game logic is in `scripts/ma
 > >
 > > ---
 > >
-> > ## 🗓️ 11-Week Development Roadmap (May 29 – Aug 10)
+> > ## 🗓️ 11-Week Development Roadmap (Sep 17 – Nov 29, 2026)
 > >
-> > **Progress checked September 16, 2026.** These are the original 2026 planning dates, not current deadlines. The playable prototype uses drawn placeholder shapes and one script; items described as scenes or separate managers below still need that structure.
+> > **Starting point (Sep 17):** A playable Godot prototype already has a fixed grid and path, virus waves, one Firewall, Data earned from kills, core health, and restart. The art and several planned systems are still placeholders. Dates below are targets; update each goal when the work is finished.
 > >
-> > | Week | Original dates | Nadeem (structure, economy, UI) | Jesse (combat, mechanics, content) | Progress |
-> > |------|----------------|----------------------------------|-------------------------------------|----------|
-> > | **1** | May 29 – Jun 4 | Godot project, Git repo, CPU core | Grid and placeholder visuals | **Partly done:** Project, repo, grid and core exist; TileMap and pixel art are pending. |
-> > | **2** | Jun 5 – Jun 11 | Enemy path setup | Basic enemy movement | **Partly done:** One fixed path and moving virus placeholders exist; A* and enemy scenes are pending. |
-> > | **3** | Jun 12 – Jun 18 | Tower placement and no overlap | Firewall targeting | **Partly done:** Click placement and automatic targeting work; a reusable tower scene is pending. |
-> > | **4** | Jun 19 – Jun 25 | Projectile damage | Waves and enemy health | **Partly done:** Visual shots, damage, health and waves work in one script; separate systems are pending. |
-> > | **5** | Jun 26 – Jul 2 | Data display and shop UI | ByteMiner economy tower | **Partly done:** Data rewards and Firewall cost display work; shop buttons and ByteMiner are pending. |
-> > | **6** | Jul 3 – Jul 9 | Corrupted tile flags | 25% tower fire-rate penalty | **Not started.** |
-> > | **7** | Jul 10 – Jul 16 | Defragmenter tower | EMP Emitter tower | **Not started.** |
-> > | **8** | Jul 17 – Jul 23 | Code Injection UI and timer | Upgrade logic and consequences | **Not started.** |
-> > | **9** | Jul 24 – Jul 30 | Tank enemy | Skipper enemy and wave balance | **Not started.** |
-> > | **10** | Jul 31 – Aug 6 | System Overload and sound | Art polish and bug fixes | **Not started.** |
-> > | **11** | Aug 7 – Aug 10 | Build testing and release package | Documentation and future challenges | **Not started:** Playable prototype only; no release build. |
+> > | Week | Target dates | Goal | Done when |
+> > |------|--------------|------|-----------|
+> > | **1** | Sep 17 – Sep 23 | Organize the prototype into reusable enemy, tower, core, wave and resource scripts/scenes. Keep the current game playable. | The game still opens and plays; the main script no longer owns every system. |
+> > | **2** | Sep 24 – Sep 30 | Turn virus placeholders into a Swarmer scene with movement, health and death. Keep a clear fixed route to the CPU. | Swarmers follow the route, show health, and damage the core if they arrive. |
+> > | **3** | Oct 1 – Oct 7 | Make Firewall a reusable tower with target detection and visible projectiles. Finish placement rules. | Shots damage enemies; towers cannot be placed on the route or an occupied tile. |
+> > | **4** | Oct 8 – Oct 14 | Add a Wave Manager, smoother wave pacing, and clear win/loss/restart feedback. | Five waves can be played from start to finish without a script error. |
+> > | **5** | Oct 15 – Oct 21 | Build a simple shop and Data display; add the ByteMiner economy tower. | Players can earn and spend Data, and ByteMiner produces it at a balanced rate. |
+> > | **6** | Oct 22 – Oct 28 | Add Corrupted tiles and the planned 25% fire-rate penalty. Show corruption on the grid. | Enemy travel marks tiles; a tower on a corrupted tile fires 25% slower. |
+> > | **7** | Oct 29 – Nov 4 | Add Defragmenter and EMP Emitter towers. | Defragmenter picks high-health targets; EMP stuns enemies in an area. |
+> > | **8** | Nov 5 – Nov 11 | Add Code Injection tower upgrades, timer, and failure debuff. | A successful challenge upgrades a tower; a failed one applies the planned temporary Bug penalty. |
+> > | **9** | Nov 12 – Nov 18 | Add Tank and Skipper enemies, then rebalance waves. | Both enemies behave differently from Swarmers, and later waves remain winnable. |
+> > | **10** | Nov 19 – Nov 25 | Add System Overload, key sound effects, and first-pass pixel art; fix playtest issues. | Ability, audio and visuals work in a full playthrough without blocking bugs. |
+> > | **11** | Nov 26 – Nov 29 | Test the full game, update instructions, and prepare a release candidate. | A fresh Godot import runs cleanly, the README explains how to play, and a downloadable build is ready to review. |
 > >
-> > **Next three steps:** (1) Move the prototype's enemies, towers, waves and currency into reusable Godot scenes/scripts. (2) Add corrupted tiles and their 25% fire-rate penalty. (3) Add the remaining towers and enemies, then playtest and rebalance waves.
+> > **First action:** Start Week 1 by separating the existing game logic while preserving the playable prototype. Nadeem's planned focus is structure, economy and UI; Jesse's planned focus is combat, mechanics and content. Revisit the schedule at the end of each week and move unfinished work forward before adding new features.
 > >
 > > ---
 > >
