@@ -98,8 +98,6 @@ func find_best_target(tower_pos: Vector2) -> Node2D:
 	for e in enemies:
 		var dist = tower_pos.distance_to(e.position)
 		if dist <= 165.0:
-			# We use a simple proxy for 'distance' here (progress in route)
-			# If Swarmer has a 'progress' var, we can use it.
 			if "progress" in e and e.progress > furthest:
 				furthest = e.progress
 				best = e
