@@ -12,7 +12,7 @@ const PINK := Color("ff48b0")
 const YELLOW := Color("ffe066")
 
 var towers: Array[Vector2i] = []
-var enemies: Array[Node2D] = []
+var enemies: Array[Swarmer] = []
 var bolts: Array[Dictionary] = []
 var credits := 100
 var health := 10
@@ -47,21 +47,21 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if game_over:
 		return
-	
+
 	wave_clock -= delta
 	if wave_clock <= 0.0 and spawn_remaining == 0 and enemies.is_empty():
 		wave += 1
 		spawn_remaining = 3 + wave * 2
 		spawn_clock = 0.0
 		wave_clock = 4.0
-	
+
 	if spawn_remaining > 0:
 		spawn_clock -= delta
 		if spawn_clock <= 0.0:
 			spawn_enemy()
 			spawn_remaining -= 1
 			spawn_clock = 0.8
-	
+
 	fire_clock -= delta
 	if fire_clock <= 0.0:
 		fire_clock = 0.55
@@ -71,48 +71,56 @@ func _process(delta: float) -> void:
 			if target:
 				bolts.append({"from": tower_pos, "to": target.position, "life": 0.12})
 				target.take_damage(1.0)
-	
+
 	for i in range(bolts.size() - 1, -1, -1):
 		bolts[i].life -= delta
 		if bolts[i].life <= 0.0:
 			bolts.remove_at(i)
-	
+
 	update_hud()
 	queue_redraw()
 
 func spawn_enemy() -> void:
-	var s = SWARMER_SCENE.instantiate()
-	var route_points = []
+	var s = SWARMER_SCENE.instantiate() as Swarmer
+	var route_points: Array[Vector2] = []
 	for p in PATH:
 		route_points.append(cell_center(p))
-	
+
 	add_child(s)
 	s.configure(route_points, float(2 + wave), 1.3 + 0.08 * wave)
 	s.reached_core.connect(_on_enemy_reached_core)
 	s.defeated.connect(_on_enemy_defeated)
 	enemies.append(s)
 
-func find_best_target(tower_pos: Vector2) -> Node2D:
-	var best := null
+func find_best_target(tower_pos: Vector2) -> Swarmer:
+	var best: Swarmer = null
 	var furthest := -1.0
 	for e in enemies:
-		var dist = tower_pos.distance_to(e.position)
-		if dist <= 165.0:
-			if "progress" in e and e.progress > furthest:
-				furthest = e.progress
-				best = e
+		if is_instance_valid(e) and not e.finished:
+			var dist = tower_pos.distance_to(e.position)
+			if dist <= 165.0:
+				if e.progress > furthest:
+					furthest = e.progress
+					best = e
 	return best
 
-func _on_enemy_reached_core(enemy: Node2D) -> void:
+func _on_enemy_reached_core(enemy: Swarmer) -> void:
+	if game_over: return
 	enemies.erase(enemy)
-	health -= 1
+	health = max(health - 1, 0)
+	update_hud()
 	if health <= 0:
 		game_over = true
 		hint.text = "SYSTEM FAILURE // PRESS R TO RESTART"
+		for e in enemies:
+			if is_instance_valid(e):
+				e.set_process(false)
 
-func _on_enemy_defeated(enemy: Node2D) -> void:
+func _on_enemy_defeated(enemy: Swarmer) -> void:
+	if game_over: return
 	enemies.erase(enemy)
 	credits += 10
+	update_hud()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_R:
