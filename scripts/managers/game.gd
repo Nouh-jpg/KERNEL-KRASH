@@ -5,6 +5,7 @@ const ORIGIN := Vector2(120, 120)
 const COLS := 15
 const ROWS := 8
 const PATH := [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4), Vector2i(3, 3), Vector2i(3, 2), Vector2i(4, 2), Vector2i(5, 2), Vector2i(6, 2), Vector2i(6, 3), Vector2i(6, 4), Vector2i(7, 4), Vector2i(8, 4), Vector2i(9, 4), Vector2i(10, 4), Vector2i(10, 5), Vector2i(11, 5), Vector2i(12, 5), Vector2i(13, 5), Vector2i(14, 5)]
+const TOWER_SCENE := preload("res://scenes/towers/tower.tscn")
 const CYAN := Color("00ffff")
 const PINK := Color("ff48b0")
 const YELLOW := Color("ffe066")
@@ -96,6 +97,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		var cell := Vector2i(floori((event.position.x - ORIGIN.x) / CELL), floori((event.position.y - ORIGIN.y) / CELL))
 		if cell.x >= 0 and cell.x < COLS and cell.y >= 0 and cell.y < ROWS and not PATH.has(cell) and not towers.has(cell) and credits >= 50:
 			towers.append(cell)
+			var tower_node = TOWER_SCENE.instantiate()
+			tower_node.position = cell_center(cell)
+			add_child(tower_node)
 			credits -= 50
 			update_hud()
 			queue_redraw()
@@ -118,10 +122,6 @@ func _draw() -> void:
 			var rect := Rect2(ORIGIN + Vector2(cell) * CELL + Vector2.ONE, Vector2.ONE * (CELL - 2))
 			draw_rect(rect, Color("212b42") if PATH.has(cell) else Color("101c32"))
 			draw_rect(rect, Color("38536b"), false, 1.0)
-	for cell in towers:
-		var p := cell_center(cell)
-		draw_rect(Rect2(p - Vector2(18, 18), Vector2(36, 36)), CYAN)
-		draw_rect(Rect2(p - Vector2(8, 8), Vector2(16, 16)), Color("101c32"))
 	for enemy in enemies:
 		var p := enemy_position(enemy)
 		draw_circle(p, 16.0, PINK)
