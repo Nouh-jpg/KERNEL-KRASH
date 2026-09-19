@@ -96,7 +96,7 @@ func find_best_target(tower_pos: Vector2) -> Swarmer:
 	var best: Swarmer = null
 	var furthest := -1.0
 	for e in enemies:
-		if is_instance_valid(e) and not e.finished:
+		if is_instance_valid(e) and not e.finished and not e.is_queued_for_deletion():
 			var dist = tower_pos.distance_to(e.position)
 			if dist <= 165.0:
 				if e.progress > furthest:
